@@ -1,0 +1,45 @@
+spring:
+  jpa:
+    database: postgresql
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        default_schema: movie
+      org:
+        hibernate:
+          envers:
+            default_schema: audit
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    schemas: movie
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: postgres
+#  jackson:
+#    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+#    serialization:
+#      write_dates_as_timestamps: false
+
+logging:
+  level:
+    com.me.storyhubuserrepositorybackend: TRACE
+
+movie-repository:
+  movie:
+    expiration-minutes: 15
+  place:
+    clear-expired-tickets-cron: "0 0/5 * * * ?"
+  ticket:
+    confirm-reservation-path: localhost:8080/tickets/confirm
