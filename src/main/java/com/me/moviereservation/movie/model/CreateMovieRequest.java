@@ -21,12 +21,10 @@ public final class CreateMovieRequest {
     private RoomNumber roomNumber;
 
     @NotNull(message = "{validation.message.required}")
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime startDate;
 
     @NotNull(message = "{validation.message.required}")
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endDate;
 

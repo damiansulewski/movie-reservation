@@ -19,12 +19,12 @@ public class MovieController {
     private final MovieService movieService;
 
     @ResponseStatus(value = HttpStatus.CREATED)
-    @PostMapping()
+    @PostMapping
     public void createMovie(@Valid @RequestBody CreateMovieRequest request) {
         movieService.createMovie(request);
     }
 
-    @GetMapping()
+    @GetMapping
     public List<GetMoviesDetailsResponse> getMoviesDetails(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
                                                            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
         return movieService.getMoviesDetails(startDate, endDate);

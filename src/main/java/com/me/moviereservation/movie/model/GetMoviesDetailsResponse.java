@@ -1,12 +1,14 @@
 package com.me.moviereservation.movie.model;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GetMoviesDetailsResponse {
     private String uuid;
     private String name;

@@ -63,13 +63,9 @@ public class MovieService {
                 movieRepository.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(startDate, endDate);
 
         return movies.stream()
-                .map(movie -> GetMoviesDetailsResponse.builder()
-                        .uuid(movie.getUuid())
-                        .name(movie.getName())
-                        .startDate(movie.getStartDate())
-                        .endDate(movie.getEndDate())
-                        .durationMinutes(movie.getStartDate().until(movie.getEndDate(), ChronoUnit.MINUTES))
-                        .build())
+                .map(movie -> new GetMoviesDetailsResponse(movie.getUuid(), movie.getName(),
+                        movie.getStartDate(), movie.getEndDate(),
+                        movie.getStartDate().until(movie.getEndDate(), ChronoUnit.MINUTES)))
                 .collect(Collectors.toList());
     }
 
@@ -78,15 +74,13 @@ public class MovieService {
                 .orElseThrow(() -> new RuntimeException(String.format("MovieEntity not found searching by uuid=[%s]",
                         uuid)));
 
-        return GetMovieRoomDetailsResponse.builder()
-                .roomNumber(RoomNumber.valueOf(movie.getRoom().getRoomNumber().getCode()))
-                .places(placeRepository.findAllByRoom(movie.getRoom()).stream()
+        return new GetMovieRoomDetailsResponse(
+                RoomNumber.valueOf(movie.getRoom().getRoomNumber().getCode()),
+                placeRepository.findAllByRoom(movie.getRoom()).stream()
                         .map(room -> Place.builder()
                                 .placeNumber(PlaceNumber.valueOf(room.getPlaceNumber().getCode()))
                                 .placeStatus(PlaceStatus.valueOf(room.getPlaceStatus().getCode()))
                                 .build())
-                        .collect(Collectors.toList()))
-                .build();
-
+                        .collect(Collectors.toList()));
     }
 }

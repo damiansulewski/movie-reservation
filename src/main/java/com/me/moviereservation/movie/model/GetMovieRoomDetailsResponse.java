@@ -1,13 +1,15 @@
 package com.me.moviereservation.movie.model;
 
 import com.me.moviereservation.roomnumber.RoomNumber;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GetMovieRoomDetailsResponse {
     private RoomNumber roomNumber;
     private List<Place> places;

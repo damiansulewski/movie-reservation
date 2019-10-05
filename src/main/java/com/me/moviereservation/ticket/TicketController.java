@@ -15,7 +15,7 @@ public class TicketController {
     private final TicketService ticketService;
 
     @ResponseStatus(value = HttpStatus.CREATED)
-    @PostMapping()
+    @PostMapping
     public void reserveTickets(@Valid @RequestBody ReserveTicketRequest request) {
         ticketService.reserveTickets(request);
     }
